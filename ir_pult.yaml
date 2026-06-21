@@ -3,14 +3,17 @@ esphome:
   friendly_name: IR Pult
   platformio_options:
     board_build.flash_mode: dio
-    board_build.flash_size: 2MB
-    board_upload.flash_size: 2MB
+    board_build.flash_size: 4MB
+    board_upload.flash_size: 4MB
+    build_flags:
+      - -DARDUINO_USB_CDC_ON_BOOT=1
+      - -DARDUINO_USB_MODE=1
 
 esp32:
   board: esp32-c3-devkitm-1
   variant: ESP32C3
   framework:
-    type: esp-idf
+    type: arduino
 
 logger:
 
@@ -23,3 +26,8 @@ wifi:
     password: "12345678"
 
 captive_portal:
+
+status_led:
+  pin:
+    number: GPIO8
+    inverted: true
