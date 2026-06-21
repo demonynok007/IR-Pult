@@ -5,7 +5,7 @@ esphome:
 esp32:
   board: esp32-c3-devkitm-1
   framework:
-    type: arduino
+    type: esp-idf
 
 logger:
 
@@ -25,13 +25,15 @@ wifi:
 captive_portal:
 
 remote_transmitter:
-  pin: GPIO4
+  pin:
+    number: GPIO4
+    inverted: false
   carrier_duty_percent: 50%
 
 button:
   - platform: template
-    name: "IR Test NEC"
+    name: "IR Test"
     on_press:
-      - remote_transmitter.transmit_nec:
-          address: 0x00FF
-          command: 0xA25D
+      - remote_transmitter.transmit_raw:
+          carrier_frequency: 38kHz
+          code: [9000, -4500, 560, -560, 560, -560, 560]
