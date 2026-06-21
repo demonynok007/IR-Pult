@@ -1,20 +1,38 @@
 esphome:
   name: ir-pult
   friendly_name: IR Pult
+  platformio_options:
+    board_build.flash_mode: dio
 
 esp32:
   board: esp32-c3-devkitm-1
+  variant: ESP32C3
   framework:
-    type: esp-idf
+    type: arduino
 
+# Логи
 logger:
+
+# Home Assistant API
+api:
+
+# Обновления по WiFi
+ota:
+  platform: esphome
 
 wifi:
   ssid: "Demonynok007"
   password: "25092014009"
 
+  # если не подключится к WiFi
   ap:
     ssid: "IR-Pult Fallback"
     password: "12345678"
 
 captive_portal:
+
+# тестовый светодиод платы
+status_led:
+  pin:
+    number: GPIO8
+    inverted: true
