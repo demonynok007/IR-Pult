@@ -1,0 +1,37 @@
+esphome:
+  name: ir-pult
+  friendly_name: IR Pult
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+logger:
+
+api:
+
+ota:
+  platform: esphome
+
+wifi:
+  ssid: "Demonynok007"
+  password: "25092014009"
+
+  ap:
+    ssid: "IR-Pult Fallback"
+    password: "12345678"
+
+captive_portal:
+
+remote_transmitter:
+  pin: GPIO4
+  carrier_duty_percent: 50%
+
+button:
+  - platform: template
+    name: "IR Test NEC"
+    on_press:
+      - remote_transmitter.transmit_nec:
+          address: 0x00FF
+          command: 0xA25D
