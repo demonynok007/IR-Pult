@@ -3,8 +3,6 @@ esphome:
   friendly_name: IR Pult
   platformio_options:
     board_build.flash_mode: dio
-    board_build.flash_size: 4MB
-    board_upload.flash_size: 4MB
     build_flags:
       - -DARDUINO_USB_CDC_ON_BOOT=1
       - -DARDUINO_USB_MODE=1
@@ -12,6 +10,7 @@ esphome:
 esp32:
   board: esp32-c3-devkitm-1
   variant: ESP32C3
+  flash_size: 4MB
   framework:
     type: arduino
 
@@ -31,3 +30,15 @@ status_led:
   pin:
     number: GPIO8
     inverted: true
+
+remote_transmitter:
+  pin: GPIO4
+  carrier_duty_percent: 50%
+
+button:
+  - platform: template
+    name: "IR Test"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          carrier_frequency: 38kHz
+          code: [9000, -4500, 560, -560, 560, -560, 560]
