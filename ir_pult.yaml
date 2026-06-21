@@ -12,13 +12,3 @@ esp32:
     type: esp-idf
 
 logger:
-
-wifi:
-  ssid: "Demonynok007"
-  password: "25092014009"
-
-  ap:
-    ssid: "IR-Pult Fallback"
-    password: "12345678"
-
-captive_portal:
